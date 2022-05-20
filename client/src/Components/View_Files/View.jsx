@@ -1,7 +1,8 @@
 import "./View.css"
 
 
-const View = () => {
+const View = (props) => {
+    console.log(props.files)
     return ( 
     <div className="View">
         View
