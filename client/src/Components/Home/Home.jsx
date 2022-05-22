@@ -24,18 +24,18 @@ const Home = (props) => {
         <div className="home">
             <div className="blob-left"></div>
             <div className="grey-bg"></div>
-            <div className="Top-container-home">
+            <div className="home-nav">
                 <div className='logo'>
                     <Link to="/" ><img src={logo} alt="logo"></img></Link>
                 </div>
                 <div className="links">
-                    <Link to="/Profiles">Profiles</Link>
+                    <Link to="/Profiles"><a>Profiles</a></Link>
 
-                    <Link to="/About">About</Link>
+                    <Link to="/About"><a>About</a></Link>
 
-                    <Link to="/Share">Share</Link>
+                    <Link to="/Share"><a>Share</a></Link>
 
-                    <Link to="/View">View</Link>
+                    <Link to="/View"><a>View</a></Link>
 
                 </div>
             </div>
@@ -45,7 +45,7 @@ const Home = (props) => {
                     <div className='taglines-content-home'>
                         <h3>Manage All your files in one place</h3>
                     </div>
-                     <div className="input-button">
+                     <div className="input-btn">
                      {!props.userAuth?<form onSubmit={handleSubmit}>
                             <input
                                 placeholder='Enter your username'
@@ -54,7 +54,7 @@ const Home = (props) => {
                             ></input>
                             <button type='Submit'>Get Started</button>
                         </form>
-                        : <button>Upload</button>
+                        : <button className='upload-btn'>Upload</button>
                         }
                     </div>
                 </div>
