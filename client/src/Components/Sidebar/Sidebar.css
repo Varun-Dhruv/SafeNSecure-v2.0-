@@ -5,6 +5,7 @@
 
 .sidebar {
   position: relative;
+  padding: 15px 20px;
 }
 
 .sidebar-toggle {
@@ -12,6 +13,7 @@
   width: 400px;
   height: 100vh;
   left: -100%;
+  padding: 15px 20px;
   top: 0;
   background: pink;
   transition: all 0.5s ease-out;
