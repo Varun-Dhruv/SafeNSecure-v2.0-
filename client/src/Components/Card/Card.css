@@ -1,6 +1,6 @@
 .card {
   position: relative;
-  height: 200px;
+  height: 170px;
   box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
     inset -5px -5px 5px rgba(255, 255, 255, 0.5),
     5px 5px 5px rgba(0, 0, 0, 0.05), -5px -5px 5px rgba(255, 255, 255, 0.5);
@@ -33,7 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
 }
 
