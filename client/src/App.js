@@ -10,6 +10,8 @@ import Upload from "./Components/Upload/Upload";
 import View from "./Components/View_Files/View"
 import Share from "./Components/ShareFiles/ShareFile";
 import Profiles from "./Components/Profiles/Profiles"
+import Card from "./Components/Card/Card"
+import Sidebar from "./Components/Sidebar/Sidebar";
 //import { Loader } from "./Loader";
 import { create } from 'ipfs-http-client'
 
@@ -228,7 +230,8 @@ const App = () => {
               filescount={FilesCount}
               files={Files}
             />} />
-            <Route path="/Profile/:Name" element={<div> Hello</div>}/>
+            <Route path="/Card" element={<Card/>}/>
+            
                 
             
         </Routes>

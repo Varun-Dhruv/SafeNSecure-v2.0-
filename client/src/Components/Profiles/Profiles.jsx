@@ -3,6 +3,8 @@ import "./Profiles.css"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Identicon from 'react-identicons';
+import Sidebar from "../Sidebar/Sidebar";
+import Card from "../Card/Card";
 
 const Profiles = (props) => {
     let navigate = useNavigate(); 
@@ -19,6 +21,7 @@ const Profiles = (props) => {
     return (
         props.userlist.length && 
         <div className="Profile">
+            <Sidebar/>
             <h1>Profiles</h1>
             <div className="searchBar-Profiles">
                 <input
@@ -31,8 +34,11 @@ const Profiles = (props) => {
             <div className="Profile-list">
                 {props.userlist.filter(user => user.userName.includes(SearchName)).map((user, key) => {
                     return (
-                        <div className="Profile-Container">
-                            <div className="Profile-identicon">
+                       
+                        <div className="Profile-content">
+                             <Card Name={user.userName}
+                             Account={user.owner}/>
+                            {/* <div className="Profile-identicon">
                                 <Identicon string={user.owner} size=' 40' />
                             </div>
                             <div className="Profile-details">
@@ -41,7 +47,7 @@ const Profiles = (props) => {
                             </div>
                             <div>
                                 <button onClick={()=>{routeChange(user.owner)}}>View Files</button>
-                            </div>
+                            </div> */}
                         </div>
                     )
                 })}
