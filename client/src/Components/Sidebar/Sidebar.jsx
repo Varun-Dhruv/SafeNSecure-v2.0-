@@ -6,7 +6,7 @@ import stb from "../../assets/stb.svg";
 import "./Sidebar.css";
 
 const Sidebar = () => {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
 
   return (
     <div className="sidebar">
