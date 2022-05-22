@@ -1,5 +1,5 @@
 const Share = () => {
-  return ( <div>Hello</div> );
+  return ( <div>Share</div> );
 }
  
 export default Share;

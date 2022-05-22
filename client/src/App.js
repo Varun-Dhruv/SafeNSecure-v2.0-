@@ -228,7 +228,7 @@ const App = () => {
               filescount={FilesCount}
               files={Files}
             />} />
-            <Route path="/Profile/:id" element={<div> Hello</div>}/>
+            <Route path="/Profile/:Name" element={<div> Hello</div>}/>
                 
             
         </Routes>
