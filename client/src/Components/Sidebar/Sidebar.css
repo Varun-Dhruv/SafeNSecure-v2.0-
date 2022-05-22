@@ -1,0 +1,22 @@
+.toggle-icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: relative;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  width: 400px;
+  height: 100vh;
+  left: -100%;
+  top: 0;
+  background: pink;
+  transition: all 0.5s ease-out;
+}
+
+.sidebar-toggle.active {
+  left: 0;
+}

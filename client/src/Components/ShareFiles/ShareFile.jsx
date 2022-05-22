@@ -1,8 +1,5 @@
-import React from 'react'
-
-export const ShareFile = () => {
-  return (
-    <div className='ShareFile'>ShareFile</div>
-  )
+const Share = () => {
+  return ( <div>Hello</div> );
 }
-
+ 
+export default Share;
