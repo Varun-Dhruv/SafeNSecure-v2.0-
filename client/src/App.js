@@ -8,17 +8,22 @@ import Home from "./Components/Home/Home"
 import About from "./Components/About/About"
 import Upload from "./Components/Upload/Upload";
 import View from "./Components/View_Files/View"
-import { ShareFile } from "./Components/ShareFiles/ShareFile";
-import { Loader } from "./Loader";
+import Share from "./Components/ShareFiles/ShareFile";
+import Profiles from "./Components/Profiles/Profiles"
+//import { Loader } from "./Loader";
+import { create } from 'ipfs-http-client'
 
-const ipfsClient = require('ipfs-http-client') //Declare IPFS
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
+
+
 
 const App = () => {
+  // connect to the default API address http://localhost:5001
+  const IPFS = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })// connect using a URL
+
 
   const [Account, setAccount] = useState('0x0256785835A772D2383a3855BE33d955181E9870')
   const [Loading, setLoading] = useState(false)
-  const [dstorage,setdstorage] =useState()
+  const [dstorage, setdstorage] = useState()
   const [UserCount, setUserCount] = useState(0)
   const [IsUserAuthenticated, setIsUserAuthenticated] = useState(false)
   const [UserList, setUserList] = useState([])
@@ -27,12 +32,16 @@ const App = () => {
   const [SharedFilesCount, setSharedFilesCount] = useState(0)
   const [Files, setFiles] = useState([])
   const [SharedFiles, setSharedFiles] = useState([])
-  const [buffer, setbuffer] = useState([])
+  //const [buffer, setbuffer] = useState()
 
-  const loadWeb3 = async () => {   //Setting up Web3
+
+
+  const loadWeb3 = async () => {  //Setting up Web3
+   
     if (window.ethereum) {
+
       window.web3 = new Web3(window.ethereum)
-      await window.ethereum.enable()
+      await window.ethereum.request({method: 'eth_requestAccounts'})
     }
     else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider)
@@ -57,20 +66,22 @@ const App = () => {
       setdstorage(dstorage)
       //Get number of users
       const UserCount = await dstorage.methods.userCount().call()
-      setUserCount({ UserCount })
+      setUserCount(UserCount)
+      console.log(UserCount)
 
-      //const SharedFiles= await dstorage.methods.sharedFiles(Account).call()
+
+      //const SharedFiles= await dstoraxge.methods.sharedFiles(Account).call()
       //console.log(SharedFiles)
 
       //Get Users addresses
       //Get User Details
       for (let i = 1; i <= UserCount; i++) {
         const user = await dstorage.methods.UserList(i).call()
-        setUserList({
-          UserList: [...UserList, user]
-        })
+        setUserList((UserList) => [...UserList, user])
       }
+      //console.log(UserList)
       UserList.map((users, key) => {
+        console.log("User", users)
         if (users.owner === Account) {
           setIsUserAuthenticated(true)
           setUserName(users.userName)
@@ -80,12 +91,17 @@ const App = () => {
       //Get files amount
       const filesCount = await dstorage.methods.fileCount().call()
       setFilesCount(filesCount);
+      console.log("Filecount", filesCount)
+
       //Load files&sort by the newest
       for (let i = filesCount; i >= 1; i--) {
+
         const file = await dstorage.methods.files(i).call()
-        setFiles({
-          Files: [...Files, file]
-        })
+
+        // console.log(i,file)
+        setFiles((Files) => [...Files, file])
+        //console.log(Files)
+
       }
       const sharedFilesCount = await dstorage.methods.sharedFilesCount(Account).call()
       setSharedFilesCount(sharedFilesCount)
@@ -103,24 +119,21 @@ const App = () => {
     }
 
     setLoading(false)
-  }, [Account, Files, SharedFiles, SharedFilesCount, UserList]);
-  useEffect(() => {
-    setLoading(true)
-    loadWeb3()
-    loadBlockChainData()
-    setLoading(false)
-  }, [loadBlockChainData])
+  }, [Account]);
 
-  const setUser =(_username)=>{
+  const ShareFile = () => {
+
+  }
+  const setUser = (_username) => {
     setLoading(true)
-   // console.log("Hello in username",_username)
-     dstorage.methods.addUser(_username).send({ from: Account }).on('transactionHash',(hash)=>{
-     setIsUserAuthenticated(true)
-     setLoading(false)
+    // console.log("Hello in username",_username)
+    dstorage.methods.addUser(_username).send({ from: Account }).on('transactionHash', (hash) => {
+      setIsUserAuthenticated(true)
+      setLoading(false)
       //console.log("Username set successfully")
-     // window.location.reload()
+      // window.location.reload()
     }).on('error', (e) => {
-      window.alert('Error',e)
+      window.alert('Error', e)
       setLoading(false)
     })
   }
@@ -139,37 +152,59 @@ const App = () => {
   }
   const uploadFile = (file) => {
     console.log("Submitting file to IPFS...")
-    const buffer=captureFile(file)
-    ipfs.add(buffer, (error, result) => { //Add file to the IPFS
-      console.log('IPFS result', result.size)
-      if (error) { //Check If error
-        console.log(error)
-        return  //Return error
-      }
+
+    const reader = new window.FileReader()
+
+    reader.readAsArrayBuffer(file)
+
+    reader.onloadend = async () => {
+      const buff = Buffer(reader.result)
+      const result = await IPFS.add(buff)
+      //console.log(result)
+
       setLoading(true)  //Set state to loading
 
-      if (this.state.type === '') {  //Assign value for the file without extension
-        this.setState({ type: 'none' })
+      if (file.type === '') {  //Assign value for the file without extension
+        file.type = 'none'
       }
       //Call smart contract uploadFile function 
-      dstorage.methods.uploadFile(result[0].hash, result[0].size, file.type, file.name).send({ from: Account }).on('transactionHash', (hash) => {
+      console.log(result.path, result.size)
+      dstorage.methods.uploadFile(result.path, result.size, file.type, file.name).send({ from: Account }).on('transactionHash', (hash) => {
         setLoading(false)
         window.location.reload()
       }).on('error', (e) => {
         window.alert('Error')
         setLoading(false)
       })
-    })
+    }
   }
 
+  useEffect(() => {
+    setLoading(true)
+    loadWeb3()
+    loadBlockChainData()
+    setLoading(false)
+    console.log(Account)
+    console.log(IsUserAuthenticated)
+  }, [])
+  
+
+  
+  
+  if(Loading){
+    console.log(Loading)
+    return(
+    
+      <div>Loader</div>
+      )
+    
+  }
   return (
     <div className="App">
+      
       <Router>
         <Routes>
-
-
           {<Route path="/" element={
-
             Loading
               ?
               <div className="Loading"><h1>Loading</h1></div>
@@ -178,18 +213,24 @@ const App = () => {
                 account={Account}
                 userAuth={IsUserAuthenticated}
                 setUserAuth={setIsUserAuthenticated}
-                setusername={setUserName} />} />}
+                setusername={setUser} />} />}
+          <Route path="/Profiles" element={<Profiles
+            userlist={UserList}
+            files={Files} />} />
           <Route path="/About" element={<About />} />
-          <Route path="/Share" element={<ShareFile />} />
+          <Route path="/Share" element={<Share />} />
           <Route path="/Upload" element={<Upload
-          capture={captureFile}
-          upload={uploadFile}
+            capture={captureFile}
+            upload={uploadFile}
           />} />
           <Route path="/View" element={
-          <View 
-          filescount={FilesCount}
-          files={Files}
-          />} />
+            <View
+              filescount={FilesCount}
+              files={Files}
+            />} />
+            <Route path="/Profile/:id" element={<div> Hello</div>}/>
+                
+            
         </Routes>
       </Router>
 
