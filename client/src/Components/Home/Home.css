@@ -43,7 +43,7 @@
 
 .home-nav {
   width: 100%;
-  padding: 25px 40px;
+  padding: 25px 50px;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -65,7 +65,8 @@
   text-decoration: none;
   font-size: 20px;
   font-weight: 500;
-  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: 900;
 }
 
 .home-nav .links a:hover {
@@ -85,15 +86,26 @@
   width: 50%;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   /* border: 2px solid black; */
-  padding: 40px;
+  padding: 40px 60px;
 }
 
 .taglines-content-home {
   margin-bottom: 80px;
-  font-size: 25px;
+  font-size: 40px;
+  letter-spacing: 2px;
   font-weight: 900;
+}
+
+.taglines-content-home span {
+  color: #5864ff;
+}
+
+.taglines-content-home h4 {
+  font-size: 20px;
+  margin-top: 40px;
+  color: rgb(101, 114, 130);
 }
 
 .input-btn {
@@ -104,7 +116,7 @@
   border-radius: 4px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3);
   padding: 0px 6px;
-  min-width: max-content;
+  width: max-content;
 }
 
 .input-btn button {
@@ -113,7 +125,7 @@
   width: max-content;
   border: none;
   height: max-content;
-  background-color: #ea4c89;
+  background-color: #5864ff;
   padding: 10px 15px;
   font-size: 15px;
   cursor: pointer;
@@ -122,9 +134,9 @@
 .input-btn input {
   height: 35px;
   border: none;
-  padding-left: 5px;
+  padding-left: 15px;
   font-size: 15px;
-  width: 200px;
+  width: 240px;
 }
 
 .input-btn input:focus {
