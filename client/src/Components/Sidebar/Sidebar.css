@@ -55,13 +55,13 @@
   border-radius: 20px;
 }
 
-.sidebar-links .sidebar-link.active {
-  background: rgb(42, 42, 93);
+.sidebar-links .sidebar-link:hover {
+  background: #a4a8ff;
   color: white;
 }
 
-.sidebar-links .sidebar-link:hover {
-  background: rgb(99, 99, 168);
+.sidebar-links .sidebar-link.active {
+  background: #5864ff;
   color: white;
 }
 
@@ -70,5 +70,3 @@
   margin-right: 20px;
 }
 
-.sidebar-links .sidebar-link .link-content {
-}
