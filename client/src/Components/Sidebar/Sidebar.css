@@ -10,15 +10,65 @@
 
 .sidebar-toggle {
   position: absolute;
-  width: 400px;
+  width: 320px;
   height: 100vh;
   left: -100%;
-  padding: 15px 20px;
+  padding: 15px 0px;
   top: 0;
-  background: pink;
+  background: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.5s ease-out;
+}
+
+.toggle-i {
+  font-size: 50px;
+  cursor: pointer;
 }
 
 .sidebar-toggle.active {
   left: 0;
+}
+
+.sidebar-toggle .sidebar-top {
+  display: flex;
+  padding: 0px 20px;
+}
+
+.sidebar-toggle .sidebar-top img {
+  height: 60px;
+  margin-left: auto;
+  filter: invert(1);
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  padding: 20px 20px;
+}
+
+.sidebar-links .sidebar-link {
+  display: flex;
+  margin-bottom: 15px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.sidebar-links .sidebar-link.active {
+  background: rgb(42, 42, 93);
+  color: white;
+}
+
+.sidebar-links .sidebar-link:hover {
+  background: rgb(99, 99, 168);
+  color: white;
+}
+
+.sidebar-links .sidebar-link svg {
+  font-size: 24px;
+  margin-right: 20px;
+}
+
+.sidebar-links .sidebar-link .link-content {
 }
