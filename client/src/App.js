@@ -78,18 +78,20 @@ const App = () => {
 
       //Get Users addresses
       //Get User Details
-      for (let i = 1; i <= UserCount; i++) {
-        const user = await dstorage.methods.UserList(i).call();
-        setUserList((UserList) => [...UserList, user]);
-      }
-      //console.log(UserList)
-      UserList.map((users, key) => {
-        console.log("User", users);
-        if (users.owner === Account) {
-          setIsUserAuthenticated(true);
-          setUserName(users.userName);
+      
+        for (let i = 1; i <= UserCount; i++) {
+          const user = await dstorage.methods.UserList(i).call()
+          console.log(i,user)
+          setUserList((UserList) => [...UserList, user])
         }
-      });
+      //console.log(UserList)
+      // UserList.map((users, key) => {
+      //   console.log("User", users)
+      //   if (users.owner === Account) {
+      //     setIsUserAuthenticated(true)
+      //     setUserName(users.userName)
+      //   }
+      // })
 
       //Get files amount
       const filesCount = await dstorage.methods.fileCount().call();
@@ -231,63 +233,45 @@ const App = () => {
     <div className="App">
       <Router>
         <Routes>
-          {
-            <Route
-              path="/"
-              element={
-                Loading ? (
-                  <div className="Loading">
-                    <h1>Loading</h1>
-                  </div>
-                ) : (
-                  <Home
-                    userlist={UserList}
-                    account={Account}
-                    userAuth={IsUserAuthenticated}
-                    setUserAuth={setIsUserAuthenticated}
-                    setusername={setUser}
-                  />
-                )
-              }
-            />
-          }
-          <Route
-            path="/Profiles"
-            element={<Profiles userlist={UserList} files={Files} />}
-          />
+          {<Route path="/" element={
+            Loading
+              ?
+              <div className="Loading"><h1>Loading</h1></div>
+              :
+              <Home
+                userlist={UserList}
+                account={Account}
+                userAuth={IsUserAuthenticated}
+                setUserAuth={setIsUserAuthenticated}
+                setusername={setUser} />} />}
+          <Route path="/Profiles" element={<Profiles
+            dstorage={dstorage}
+            userlist={UserList}
+            files={Files} />} />
           <Route path="/About" element={<About />} />
-          <Route
-            path="/Share"
-            element={
-              <Share
-                Account={Account}
-                files={Files}
-                Share={ShareFile}
-                users={UserList}
-              />
-            }
-          />
-          <Route
-            path="/Upload"
-            element={<Upload capture={captureFile} upload={uploadFile} />}
-          />
-          <Route
-            path="/View"
-            element={
-              <View
-                Account={Account}
-                SharedFiles={SharedFiles}
-                filescount={FilesCount}
-                files={Files}
-              />
-            }
-          />
-          <Route
-            path="/Profile/:Account"
-            element={<CardFiles userlist={UserList} files={Files} />}
-          />
-
-          <Route path="/dropdown" element={<Dropdown />} />
+          <Route path="/Share" element={<Share
+           dstorage={dstorage}
+          Account={Account}
+          files={Files}
+          Share={ShareFile}
+          users={UserList} />} />
+          <Route path="/Upload" element={<Upload
+            capture={captureFile}
+            upload={uploadFile}
+          />} />
+          <Route path="/View" element={
+            <View
+            dstorage={dstorage}
+              Account={Account}
+              SharedFiles={SharedFiles}
+              filescount={FilesCount}
+              files={Files}
+            />} />
+            <Route path="/Profile/:Account" element={<CardFiles userlist={UserList}
+                                                           files={Files} />}/>
+            
+                
+            
         </Routes>
       </Router>
     </div>
