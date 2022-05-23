@@ -155,7 +155,6 @@
 
 .file-drop > .file-drop-target.file-drop-dragging-over-frame .upload-btn {
   transform-style: preserve-3d;
-  transform: scale(1.1);
   background: #3743cc;
 }
 
