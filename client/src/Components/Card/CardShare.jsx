@@ -15,7 +15,7 @@ const Card = (props) => {
           </p> 
           <p> Account: {props.Account}</p>
           </div>
-          <a href={'/Profile/'+props.Account}>View Files</a>
+         <button onClick={()=>{console.log("S")}}>Share</button>
         </div>
       </div>
     </div>

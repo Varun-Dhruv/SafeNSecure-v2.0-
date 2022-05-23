@@ -4,6 +4,7 @@ import { AiOutlineFolderOpen, AiOutlineAlignLeft } from "react-icons/ai";
 import { MdOutlineHome } from "react-icons/md";
 import stb from "../../assets/stb.svg";
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [toggle, setToggle] = useState(false);
@@ -22,19 +23,19 @@ const Sidebar = () => {
         <div className="sidebar-links">
           <div className="sidebar-link active">
             <MdOutlineHome />
-            <div className="link-content">Home</div>
+            <div className="link-content"><Link to="/">Home</Link></div>
           </div>
           <div className="sidebar-link">
             <AiOutlineFolderOpen />
-            <div className="link-content">Files</div>
+            <div className="link-content"><Link to="/View">Files</Link></div>
           </div>
           <div className="sidebar-link">
             <MdOutlineHome />
-            <div className="link-content">Home</div>
+            <div className="link-content"><Link to="/Upload">Upload</Link></div>
           </div>
           <div className="sidebar-link">
             <AiOutlineFolderOpen />
-            <div className="link-content">Files</div>
+            <div className="link-content"><Link to="/Share">Share</Link></div>
           </div>
         </div>
       </div>

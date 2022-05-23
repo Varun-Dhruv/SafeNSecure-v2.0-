@@ -1,12 +1,18 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/stb.svg";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import right from "../../assets/right-content.png";
-
+import { useNavigate } from "react-router-dom";
 const Home = (props) => {
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+  let path = `/Upload` 
+  navigate(path);
+}
   //console.log(props.userAuth)
   const [UserName, setUserName] = useState("");
+  const [authUser,setauthUser]=useState(false);
   const handleChange = (event) => {
     const { value } = event.target;
     setUserName((data) => {
@@ -20,6 +26,16 @@ const Home = (props) => {
     props.setusername(UserName);
     props.setUserAuth(true);
   };
+  useEffect(() => {
+    
+  for(let i=0;i<props.userlist.length;i++)
+  {
+    if(props.userlist[i].owner===props.account)
+    setauthUser(true)
+  }
+    
+  }, [props.userlist])
+  
   return (
     <div className="home">
       <div className="blob-left"></div>
@@ -58,7 +74,7 @@ const Home = (props) => {
             <h4>A comfortable and secure way to access all your files</h4>
           </div>
           <div className="input-btn">
-            {!props.userAuth ? (
+            {!authUser ? (
               <form onSubmit={handleSubmit}>
                 <input
                   placeholder="Enter your username"
@@ -68,7 +84,9 @@ const Home = (props) => {
                 <button type="Submit">Get Started</button>
               </form>
             ) : (
-              <button className="upload-btn">Upload</button>
+              <button onClick={()=>{
+                routeChange()
+              }} className="upload-btn">Upload</button>
             )}
           </div>
         </div>

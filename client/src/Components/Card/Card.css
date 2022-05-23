@@ -73,3 +73,7 @@
 .card:hover .box .content a {
   background: #ff568f;
 }
+.Info{
+  margin-left: 150px;
+  margin-right: 150px;
+}

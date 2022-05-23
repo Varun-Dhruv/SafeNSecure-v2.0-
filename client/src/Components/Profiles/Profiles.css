@@ -1,0 +1,35 @@
+.Profile{
+    margin:20px;
+}
+.searchBar-Profiles
+{
+    margin:20px
+}
+.searchBar-Profiles input{
+    color: red;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+   box-shadow: 0px 0px 7px rgba(0,0,0,0.3);
+    height: 30px;
+    width: 300px;
+}
+.Profile-Container{
+    margin: 40px;
+    width: 1200px;
+    border: 2px solid;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.Profile-Container button{
+    margin :10px;
+    margin-right: 5px;
+    box-sizing: border-box;
+    height: 25px;
+    width: 100px;
+    background-color: #ea4c89;
+    border: none;
+    box-shadow: 0px 0px 7px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    color: white;
+}

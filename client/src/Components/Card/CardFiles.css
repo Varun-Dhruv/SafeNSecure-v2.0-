@@ -38,12 +38,13 @@
   }
   
   .card .box .content img {
+    
     width: 100px;
     height: 100%;
     margin-right: 20px;
   }
   
-  .card .box .content p {
+  .card .box .content li {
     font-size: 1em;
     font-weight: 300;
     color: #777;
@@ -52,13 +53,16 @@
     margin-right: 25px;
   }
   
-  .card:hover .box .content p {
+  .card:hover .box .content li {
     color: white;
   }
   
-  .card .box .content a {
+  .card .box .content button {
+
+    
     position: relative;
     display: inline-block;
+    border: none;
     text-decoration: none;
     padding: 8px 20px;
     background: #03a9f4;
@@ -70,10 +74,13 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
   
-  .card:hover .box .content a {
+  .card:hover .box .content button{
     background: #ff568f;
   }
   .Info{
     margin-left: 150px;
     margin-right: 150px;
+  }
+  li{
+      list-style: none;
   }
