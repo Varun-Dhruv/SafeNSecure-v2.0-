@@ -36,9 +36,11 @@ const Upload = (props) => {
       props.upload(files[k]);
     }
   };
+
   const showSettings = (event) => {
     event.preventDefault();
   };
+  
   return (
     <div className="upload-file-container">
       <div className="upload-left-section">
