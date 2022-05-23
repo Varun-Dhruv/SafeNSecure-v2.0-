@@ -13,43 +13,41 @@ const View = (props) => {
   const [SharedFilesCount, setSharedFilesCount] = useState(0);
   const [SharedFiles, setSharedFiles] = useState([]);
   let Account = props.Account;
-  useEffect(async () => {
-    const filesCount = await props.dstorage.methods.fileCount().call();
-    setFilesCount(filesCount);
-    console.log("Filecount", filesCount);
+  // const handleFile = async () => {
+  //     FilesCount = await props.dstorage.methods.fileCount().call()
+  //     setFilesCount(FilesCount);
+  //     console.log("Filecount", ilesCount)
 
-    //Load files&sort by the newest
-    for (let i = filesCount; i >= 1; i--) {
-      const file = await props.dstorage.methods.files(i).call();
-      // console.log(i,file)
-      setFiles((Files) => [...Files, file]);
-      //console.log(Files)
-      const sharedFilesCount = await props.dstorage.methods
-        .sharedFilesCount(Account)
-        .call();
-      setSharedFilesCount(sharedFilesCount);
+  //     //Load files&sort by the newest
+  //     for (let i = filesCount; i >= 1; i--) {
+  //         const file = await props.dstorage.methods.files(i).call()
+  //         // console.log(i,file)
+  //         setFiles((Files) => [...Files, file])
+  //     }
+  // }
+  // const SharedFile = async () => {
+  //     const sharedFilesCount = await props.dstorage.methods.sharedFilesCount(Account).call()
+  //     setSharedFilesCount(sharedFilesCount)
 
-      for (let i = 0; i < SharedFilesCount; i++) {
-        // console.log("Shared File no.",i)
-        const SharedFile = await props.dstorage.methods
-          .getSharedFile(Account, i)
-          .call();
-        console.log(SharedFile);
-        setSharedFiles((SharedFiles) => [...SharedFiles, SharedFile]);
-        // console.log(this.state.SharedFiles)
-      }
-      let Account = props.Account;
-      Files.filter((file) => {
-        if (file.uploader === Account) return true;
-        return false;
-      });
-      console.log("View", Files);
-      console.log("Shared Files", SharedFiles);
-    }
+  //     for (let i = 0; i < SharedFilesCount; i++) {
+  //         // console.log("Shared File no.",i)
+  //         const SharedFile = await props.dstorage.methods.getSharedFile(Account, i).call()
+  //         setSharedFiles((SharedFiles) => [...SharedFiles, SharedFile])
+  //         // console.log(this.state.SharedFiles)
+  //     }
+  // }
+  useEffect(() => {
+    //console.log(Files)
+
+    let Account = props.Account;
+    props.files.filter((file) => {
+      if (file.uploader === Account) return true;
+      return false;
+    });
   }, [props.dstorage]);
 
   return (
-    <div className="Profile-Files">
+    <div className="profile-files">
       <Sidebar />
       <h1>Files</h1>
       <Tabs>
@@ -58,7 +56,7 @@ const View = (props) => {
           <Tab>Shared With Me</Tab>
         </TabList>
         <TabPanel>
-          {Files.map((file, key) => {
+          {props.files.map((file, key) => {
             return (
               <div className="card">
                 <div className="box">
@@ -81,7 +79,7 @@ const View = (props) => {
           })}
         </TabPanel>
         <TabPanel>
-          {SharedFiles.map((file, key) => {
+          {props.SharedFiles.map((file, key) => {
             console.log("Shared Files View", file);
             return (
               <div className="card">

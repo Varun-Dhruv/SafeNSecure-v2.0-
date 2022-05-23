@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
-import { AiOutlineFolderOpen, AiOutlineAlignLeft } from "react-icons/ai";
+import {
+  AiOutlineFolderOpen,
+  AiOutlineAlignLeft,
+  AiOutlineShareAlt,
+} from "react-icons/ai";
+import { FaRegShareSquare } from "react-icons/fa";
 import { MdOutlineHome } from "react-icons/md";
 import stb from "../../assets/stb.svg";
 import "./Sidebar.css";
@@ -40,7 +45,7 @@ const Sidebar = (props) => {
             </div>
           </div>
           <div className="sidebar-link">
-            <AiOutlineFolderOpen />
+            <AiOutlineShareAlt />
             <div className="link-content">
               <Link to="/Share">Share</Link>
             </div>

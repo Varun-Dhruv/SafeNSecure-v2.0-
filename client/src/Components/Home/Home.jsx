@@ -1,18 +1,18 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/stb.svg";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import right from "../../assets/right-content.png";
 import { useNavigate } from "react-router-dom";
 const Home = (props) => {
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-  let path = `/Upload` 
-  navigate(path);
-}
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/Upload`;
+    navigate(path);
+  };
   //console.log(props.userAuth)
   const [UserName, setUserName] = useState("");
-  const [authUser,setauthUser]=useState(false);
+  const [authUser, setauthUser] = useState(false);
   const handleChange = (event) => {
     const { value } = event.target;
     setUserName((data) => {
@@ -27,15 +27,11 @@ const Home = (props) => {
     props.setUserAuth(true);
   };
   useEffect(() => {
-    
-  for(let i=0;i<props.userlist.length;i++)
-  {
-    if(props.userlist[i].owner===props.account)
-    setauthUser(true)
-  }
-    
-  }, [props.userlist])
-  
+    for (let i = 0; i < props.userlist.length; i++) {
+      if (props.userlist[i].owner === props.account) setauthUser(true);
+    }
+  }, [props.userlist]);
+
   return (
     <div className="home">
       <div className="blob-left"></div>
@@ -84,9 +80,14 @@ const Home = (props) => {
                 <button type="Submit">Get Started</button>
               </form>
             ) : (
-              <button onClick={()=>{
-                routeChange()
-              }} className="upload-btn">Upload</button>
+              <button
+                onClick={() => {
+                  routeChange();
+                }}
+                className="upload-btn"
+              >
+                Upload
+              </button>
             )}
           </div>
         </div>
