@@ -201,6 +201,7 @@
 }
 
 .upload-right-section .file {
+  cursor: pointer;
   background: #ebf5fc;
   font-size: 30px;
   box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.08);
@@ -209,8 +210,15 @@
   margin-bottom: 20px;
   display: flex;
   align-items: center;
-  transition: 0.5s;
+  transition: transform 0.3s ease-out;
   overflow-wrap: break-word;
+}
+
+.upload-right-section .file:hover {
+  background: linear-gradient(45deg, #b95ce4, #4f29cd);
+  color: white;
+  transform: translateX(-8px) scale(1.02);
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);
 }
 
 .upload-right-section .file h6 {
