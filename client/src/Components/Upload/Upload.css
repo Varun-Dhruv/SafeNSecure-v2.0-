@@ -1,7 +1,11 @@
 .upload-file-container {
   display: flex;
   justify-content: space-around;
-  margin-top: 100px;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding-top: 100px;
+  background: #f3f6fd;
+  background: linear-gradient(90deg, #f3f6fd, #e8f6f7);
 }
 
 .upload-left-section {
@@ -46,6 +50,7 @@
   display: grid;
   place-items: center;
   margin-bottom: 20px;
+  background: white;
 }
 
 .file-drop img {
@@ -155,6 +160,7 @@
   padding-right: 1px;
   display: flex;
   align-items: center;
+  background: white;
 }
 
 .upload-right-section .file-view-section .file-container {
