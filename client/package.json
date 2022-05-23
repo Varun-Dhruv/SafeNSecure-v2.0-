@@ -13,6 +13,7 @@
     "react-identicons": "^1.2.5",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^4.0.3",
+    "react-tabs": "4.0",
     "web3": "^1.6.1",
     "webpack": "^4.44.2"
   },

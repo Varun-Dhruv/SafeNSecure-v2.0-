@@ -18,6 +18,7 @@ const Profiles = (props) => {
         const { value } = event.target;
         setSearchName((data) => { return value })
     }
+   
     return (
         props.userlist.length && 
         <div className="Profile">
@@ -29,7 +30,6 @@ const Profiles = (props) => {
                     placeholder="Enter UserName to Search"
                     onChange={handleChange}
                 />
-
             </div>
             <div className="Profile-list">
                 {props.userlist.filter(user => user.userName.includes(SearchName)).map((user, key) => {

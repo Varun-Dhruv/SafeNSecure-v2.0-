@@ -10,7 +10,7 @@ import Upload from "./Components/Upload/Upload";
 import View from "./Components/View_Files/View"
 import Share from "./Components/ShareFiles/ShareFile";
 import Profiles from "./Components/Profiles/Profiles"
-import Card from "./Components/Card/Card"
+import CardFiles from "./Components/Card/CardFiles"
 import Sidebar from "./Components/Sidebar/Sidebar";
 //import { Loader } from "./Loader";
 import { create } from 'ipfs-http-client'
@@ -111,9 +111,8 @@ const App = () => {
       for (let i = 0; i < SharedFilesCount; i++) {
         // console.log("Shared File no.",i)
         const SharedFile = await dstorage.methods.getSharedFile(Account, i).call()
-        setSharedFiles({
-          SharedFiles: [...SharedFiles, SharedFile]
-        })
+        console.log(SharedFile)
+        setSharedFiles((SharedFiles) => [...SharedFiles, SharedFile])
         // console.log(this.state.SharedFiles)
       }
     } else { //Else
@@ -123,8 +122,18 @@ const App = () => {
     setLoading(false)
   }, [Account]);
 
-  const ShareFile = () => {
-
+  const ShareFile = (address,fileHash,fileSize,fileType,fileName) => {
+          //console.log(address,fileHash,fileSize,fileType,fileName,fileDescription);
+    setLoading(true)
+    console.log("inSHaerefile",address,fileHash,fileSize,fileType,fileName)
+     dstorage.methods.shareFile(address,fileHash,fileSize,fileType,fileName).send({ from: Account }).on('transactionHash',(hash)=>{
+      setLoading(false)
+      alert("File Shared  successfully")
+     // window.location.reload()
+    }).on('error', (e) => {
+      window.alert('Error',e)
+     setLoading(false)
+    })    
   }
   const setUser = (_username) => {
     setLoading(true)
@@ -188,10 +197,11 @@ const App = () => {
     setLoading(false)
     console.log(Account)
     console.log(IsUserAuthenticated)
-  }, [])
+    
+  }, [loadBlockChainData])
   
 
-  
+  //console.log("SharedFile ",SharedFiles[0])
   
   if(Loading){
     console.log(Loading)
@@ -212,6 +222,7 @@ const App = () => {
               <div className="Loading"><h1>Loading</h1></div>
               :
               <Home
+                userlist={UserList}
                 account={Account}
                 userAuth={IsUserAuthenticated}
                 setUserAuth={setIsUserAuthenticated}
@@ -220,17 +231,24 @@ const App = () => {
             userlist={UserList}
             files={Files} />} />
           <Route path="/About" element={<About />} />
-          <Route path="/Share" element={<Share />} />
+          <Route path="/Share" element={<Share
+          Account={Account}
+          files={Files}
+          Share={ShareFile}
+          users={UserList} />} />
           <Route path="/Upload" element={<Upload
             capture={captureFile}
             upload={uploadFile}
           />} />
           <Route path="/View" element={
             <View
+              Account={Account}
+              SharedFiles={SharedFiles}
               filescount={FilesCount}
               files={Files}
             />} />
-            <Route path="/Card" element={<Card/>}/>
+            <Route path="/Profile/:Account" element={<CardFiles userlist={UserList}
+                                                           files={Files} />}/>
             
                 
             

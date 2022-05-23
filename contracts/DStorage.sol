@@ -64,8 +64,8 @@ contract DStorage {
   //Get Shared Files
   
  //Share a file 
-  function shareFile(address payable receiver ,string memory _fileHash, uint _fileSize, string memory _fileType, string memory _fileName
-  ) public {
+  function shareFile(address payable receiver ,string memory _fileHash, uint _fileSize, string memory _fileType, string memory _fileName) public
+   {
     require((bytes(_fileHash).length>0)); // Make sure the file hash exists
 
     require((bytes(_fileType).length>0)); // Make sure file type exists
