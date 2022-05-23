@@ -9,6 +9,7 @@ contract DStorage {
   mapping(address=>uint) public sharedFilesCount;
   uint public fileCount=0;  // Number of files
   mapping(uint=>File) public files;// Mapping fileId=>Struct 
+  
 
  // Struct Files
  struct File{
@@ -24,6 +25,11 @@ contract DStorage {
   struct User{
     string userName;
     address payable owner;
+  }
+  struct Request{
+    address payable Requester;
+    address payable Owner;
+    File file;
   }
 
   // Event

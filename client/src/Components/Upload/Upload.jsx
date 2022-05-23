@@ -14,6 +14,13 @@ const Upload = (props) => {
     }
     console.log(files)
     }
+    const handleFiles =(e,files)=>{
+      e.preventDefault()
+      for(let i=0; i<files.length; i++){
+        setFiles((prevFiles)=>[...prevFiles,files[i]])
+    }
+    console.log(files)
+    }
     const onTargetClick=()=>{
 
     }
@@ -39,9 +46,15 @@ const Upload = (props) => {
                   className="Input File"
                   onChange={handleFile}
                   />
-
-                
                 <button type="submit">Submit</button>
+                <FileDrop
+                    onFrameDragEnter={(event) => console.log('onFrameDragEnter', event)}
+                    onFrameDragLeave={(event) => console.log('onFrameDragLeave', event)}
+                    onFrameDrop={(event) => console.log('onFrameDrop', event)}
+                    onDragOver={(event) => console.log('onDragOver', event)}
+                    onDragLeave={(event) => console.log('onDragLeave', event)}
+                    onDrop={(files, event) =>handleFiles(event,files)}
+                   ></FileDrop>
             </form>
             <br>
             </br>
