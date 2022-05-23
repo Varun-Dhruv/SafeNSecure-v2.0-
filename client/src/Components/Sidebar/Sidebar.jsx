@@ -6,11 +6,11 @@ import stb from "../../assets/stb.svg";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ background: props.background }}>
       <AiOutlineAlignLeft
         className={`toggle-icon toggle-line ${!toggle ? "active" : ""}`}
         onClick={() => setToggle(true)}
@@ -23,19 +23,27 @@ const Sidebar = () => {
         <div className="sidebar-links">
           <div className="sidebar-link active">
             <MdOutlineHome />
-            <div className="link-content"><Link to="/">Home</Link></div>
+            <div className="link-content">
+              <Link to="/">Home</Link>
+            </div>
           </div>
           <div className="sidebar-link">
             <AiOutlineFolderOpen />
-            <div className="link-content"><Link to="/View">Files</Link></div>
+            <div className="link-content">
+              <Link to="/View">Files</Link>
+            </div>
           </div>
           <div className="sidebar-link">
             <MdOutlineHome />
-            <div className="link-content"><Link to="/Upload">Upload</Link></div>
+            <div className="link-content">
+              <Link to="/Upload">Upload</Link>
+            </div>
           </div>
           <div className="sidebar-link">
             <AiOutlineFolderOpen />
-            <div className="link-content"><Link to="/Share">Share</Link></div>
+            <div className="link-content">
+              <Link to="/Share">Share</Link>
+            </div>
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 .upload-file-container {
   display: flex;
   justify-content: space-around;
-  min-height: 100vh;
-  min-width: 100vw;
-  padding-top: 100px;
+  min-height: calc(100vh - 64px);
+  min-width: 100%;
+  padding-top: 60px;
   background: #f3f6fd;
   background: linear-gradient(90deg, #f3f6fd, #e8f6f7);
 }
