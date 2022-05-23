@@ -77,18 +77,20 @@ const App = () => {
 
       //Get Users addresses
       //Get User Details
-      for (let i = 1; i <= UserCount; i++) {
-        const user = await dstorage.methods.UserList(i).call()
-        setUserList((UserList) => [...UserList, user])
-      }
-      //console.log(UserList)
-      UserList.map((users, key) => {
-        console.log("User", users)
-        if (users.owner === Account) {
-          setIsUserAuthenticated(true)
-          setUserName(users.userName)
+      
+        for (let i = 1; i <= UserCount; i++) {
+          const user = await dstorage.methods.UserList(i).call()
+          console.log(i,user)
+          setUserList((UserList) => [...UserList, user])
         }
-      })
+      //console.log(UserList)
+      // UserList.map((users, key) => {
+      //   console.log("User", users)
+      //   if (users.owner === Account) {
+      //     setIsUserAuthenticated(true)
+      //     setUserName(users.userName)
+      //   }
+      // })
 
       //Get files amount
       const filesCount = await dstorage.methods.fileCount().call()
@@ -228,10 +230,12 @@ const App = () => {
                 setUserAuth={setIsUserAuthenticated}
                 setusername={setUser} />} />}
           <Route path="/Profiles" element={<Profiles
+            dstorage={dstorage}
             userlist={UserList}
             files={Files} />} />
           <Route path="/About" element={<About />} />
           <Route path="/Share" element={<Share
+           dstorage={dstorage}
           Account={Account}
           files={Files}
           Share={ShareFile}
@@ -242,6 +246,7 @@ const App = () => {
           />} />
           <Route path="/View" element={
             <View
+            dstorage={dstorage}
               Account={Account}
               SharedFiles={SharedFiles}
               filescount={FilesCount}

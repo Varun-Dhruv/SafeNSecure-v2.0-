@@ -12,15 +12,32 @@ const Profiles = (props) => {
     let path = `/Profile/`+owner; 
     navigate(path);
   }
+  useEffect(() => {
+   console.log(props.userlist)
+  }, [])
+  
     const [SearchName, setSearchName] = useState('')
-
+    const [UserCount, setUserCount] = useState(0)
+    const [UserList, setUserList] = useState([])
+    
     const handleChange = (event) => {
         const { value } = event.target;
         setSearchName((data) => { return value })
     }
+    useEffect(async() => {
+        const UserCount = await props.dstorage.methods.userCount().call()
+         setUserCount(UserCount)
+         console.log(UserCount)
+      
+        for (let i = 1; i <= UserCount; i++) {
+          const user = await props.dstorage.methods.UserList(i).call()
+          console.log(i,user)
+          setUserList((UserList) => [...UserList, user])
+        }
+        console.log(UserList)
+       }, [props.dstorage])
    
     return (
-        props.userlist.length && 
         <div className="Profile">
             <Sidebar/>
             <h1>Profiles</h1>
@@ -32,7 +49,7 @@ const Profiles = (props) => {
                 />
             </div>
             <div className="Profile-list">
-                {props.userlist.filter(user => user.userName.includes(SearchName)).map((user, key) => {
+                { UserList.filter(user => user.userName.includes(SearchName)).map((user, key) => {
                     return (
                        
                         <div className="Profile-content">

@@ -6,6 +6,7 @@
 .sidebar {
   position: relative;
   padding: 15px 20px;
+  z-index: 50;
 }
 
 .sidebar-toggle {
@@ -60,8 +61,12 @@
   color: white;
 }
 
-.sidebar-links .sidebar-link:hover {
-  background: rgb(99, 99, 168);
+.sidebar-links .sidebar-link a {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar-links .sidebar-link.active a {
   color: white;
 }
 

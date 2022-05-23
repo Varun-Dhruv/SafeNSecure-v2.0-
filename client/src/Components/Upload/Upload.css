@@ -1,63 +1,234 @@
+.upload-file-container {
+  display: flex;
+  justify-content: space-around;
+  min-height: 100vh;
+  min-width: 100vw;
+  padding-top: 100px;
+  background: #f3f6fd;
+  background: linear-gradient(90deg, #f3f6fd, #e8f6f7);
+}
+
+.upload-left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-file-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #2f3468;
+}
+
+.upload-left-section button {
+  cursor: pointer;
+  padding: 10px 40px;
+  font-size: 15px;
+  background: #4453f9;
+  color: white;
+  border-radius: 5px;
+  font-weight: 700;
+  width: max-content;
+  border: none;
+  height: max-content;
+  letter-spacing: 1.5px;
+}
+
+.upload-left-section button:hover {
+  background: #3743cc;
+}
+
+.drag-area {
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+    inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+    5px 5px 5px rgba(0, 0, 0, 0.05), -5px -5px 5px rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  width: calc(400px + 60px);
+  height: calc(300px + 60px);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  background: white;
+}
+
+.file-drop img {
+  width: 70px;
+  margin-bottom: 20px;
+  transition: all 0.4s ease-out;
+}
+
+.file-drop h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.file-drop span {
+  margin-bottom: 20px;
+  position: relative;
+  color: rgb(128, 136, 137);
+  letter-spacing: 1px;
+}
+
+.file-drop span::before {
+  content: "";
+  position: absolute;
+  transform: translate(-110%, 10px);
+  width: 40px;
+  height: 1px;
+  background: rgb(128, 136, 137);
+}
+
+.file-drop span::after {
+  content: "";
+  position: absolute;
+  transform: translate(10%, 10px);
+  width: 40px;
+  height: 1px;
+  background: rgb(128, 136, 137);
+}
+
+.file-drop .upload-btn {
+  cursor: pointer;
+  padding: 10px 15px;
+  background: #4453f9;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 700;
+  width: max-content;
+  height: max-content;
+  letter-spacing: 1.5px;
+  transition: all 0.4s ease-out;
+}
+
+.file-drop .upload-btn:hover {
+  background: #3743cc;
+}
 
 .file-drop {
   /* relatively position the container bc the contents are absolute */
   position: relative;
-  height: 100px;
-  width: 100%;
+  height: 300px;
+  width: 400px;
+  border-radius: 20px;
+  background: #f3f6fd;
+  border: 2px dashed #ffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  stroke-dasharray: "20";
+  stroke-width: "10px";
 }
 
 .file-drop > .file-drop-target {
-  /* basic styles */
+  transform-style: preserve-3d;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
   border-radius: 2px;
-
-  /* horizontally and vertically center all content */
+  padding: 40px;
   display: flex;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-
   flex-direction: column;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-
   align-items: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-
   justify-content: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-
   align-content: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-
   text-align: center;
+  transition: all 0.2s ease-out;
 }
 
 .file-drop > .file-drop-target.file-drop-dragging-over-frame {
-  /* overlay a black mask when dragging over the frame */
+  transform-style: preserve-3d;
   border: none;
-  background-color: rgba(0, 0, 0, 0.65);
-  box-shadow: none;
+  background-color: #d1dcf6;
   z-index: 50;
   opacity: 1;
+  border-radius: 20px;
+  transform: scale(1.1);
+}
 
-  /* typography */
-  color: white;
+.file-drop > .file-drop-target.file-drop-dragging-over-frame img {
+  transform-style: preserve-3d;
+  transform: rotateZ(20deg) scale(1.2);
+}
+
+.file-drop > .file-drop-target.file-drop-dragging-over-frame .upload-btn {
+  transform-style: preserve-3d;
+  background: #3743cc;
 }
 
 .file-drop > .file-drop-target.file-drop-dragging-over-target {
-  /* turn stuff orange when we are dragging over the target */
-  color: #ff6e40;
-  box-shadow: 0 0 13px 3px #ff6e40;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.upload-right-section {
+  /* border: 1px solid red; */
+}
+
+.upload-right-section .file-view-section {
+  width: 400px;
+  height: 420px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
+    inset -5px -5px 5px rgba(255, 255, 255, 0.5),
+    5px 5px 5px rgba(0, 0, 0, 0.05), -5px -5px 5px rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding-right: 1px;
+  display: flex;
+  align-items: center;
+  background: white;
+}
+
+.upload-right-section .file-view-section .file-container {
+  overflow: auto;
+  width: calc(100% - 4px);
+  height: calc(100% - 30px);
+  padding: 10px 20px;
+}
+
+.file-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.file-container::-webkit-scrollbar-thumb {
+  background: rgb(124, 185, 197);
+  border-radius: 50px;
+}
+
+.file-container::-webkit-scrollbar-track {
+  background: rgb(233, 231, 231);
+  border-radius: 50px;
+}
+
+.upload-right-section .file {
+  cursor: pointer;
+  background: #ebf5fc;
+  font-size: 30px;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease-out;
+  overflow-wrap: break-word;
+}
+
+.upload-right-section .file:hover {
+  background: linear-gradient(45deg, #b95ce4, #4f29cd);
+  color: white;
+  transform: translateX(-8px) scale(1.02);
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);
+}
+
+.upload-right-section .file h6 {
+  font-size: 18px;
+  width: calc(100% - 80px);
+}
+
+.upload-right-section .file svg {
+  margin: 0px 20px;
+  min-width: 18px;
+  font-size: 20px;
+  font-weight: 700;
 }

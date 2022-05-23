@@ -5,21 +5,49 @@ import spidy from "../../assets/stb.svg";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Sidebar from "../Sidebar/Sidebar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const View = (props) => {
+    const [FilesCount, setFilesCount] = useState(0)
+    const [Files, setFiles] = useState([])
+    const [SharedFilesCount, setSharedFilesCount] = useState(0)
+    const [SharedFiles, setSharedFiles] = useState([])
     let Account=props.Account
-    useEffect(() => {
+    useEffect(async() => {
+        const filesCount = await props.dstorage.methods.fileCount().call()
+        setFilesCount(filesCount);
+        console.log("Filecount", filesCount)
+  
+        //Load files&sort by the newest
+        for (let i = filesCount; i >= 1; i--) {
+  
+          const file = await props.dstorage.methods.files(i).call()
+          // console.log(i,file)
+          setFiles((Files) => [...Files, file])
+          //console.log(Files)
+          const sharedFilesCount = await props.dstorage.methods.sharedFilesCount(Account).call()
+          setSharedFilesCount(sharedFilesCount)
+    
+          for (let i = 0; i < SharedFilesCount; i++) {
+            // console.log("Shared File no.",i)
+            const SharedFile = await props.dstorage.methods.getSharedFile(Account, i).call()
+            console.log(SharedFile)
+            setSharedFiles((SharedFiles) => [...SharedFiles, SharedFile])
+            // console.log(this.state.SharedFiles)
+         }
         let Account=props.Account
-        props.files.filter((file) => {
+        Files.filter((file) => {
             if (file.uploader === Account) return true
             return false
         })
-        console.log('View', props.files)
-        let SharedFiles=props.SharedFiles
-        console.log("Shared FIles",SharedFiles)
-    }, [props.files,props.Account])
+        console.log('View', Files)
+        console.log("Shared Files",SharedFiles)
+    }
+}
+    ,[props.dstorage])
     
+    
+
    
    
     return (
@@ -34,7 +62,7 @@ const View = (props) => {
       <Tab>Shared With Me</Tab>
     </TabList>
     <TabPanel>
-            {props.files.map((file, key) => {
+            {Files.map((file, key) => {
                 
                 return (
                     <div className="card">
@@ -56,7 +84,7 @@ const View = (props) => {
             </TabPanel>
             <TabPanel>
             {
-            props.SharedFiles.map((file, key) => {
+            SharedFiles.map((file, key) => {
                 console.log("Shared Files View",file)
                 return (
                     <div className="card">

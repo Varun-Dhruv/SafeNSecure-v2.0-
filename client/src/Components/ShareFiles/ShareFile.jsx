@@ -4,6 +4,7 @@ import Card from "../Card/CardShare";
 import spidy from "../../assets/stb.svg";
 import Identicon from 'react-identicons';
 import { convertBytes } from "../../helpers";
+import Sidebar from "../Sidebar/Sidebar";
 const Share = (props) => {
 
   const [SearchName, setSearchName] = useState('')
@@ -43,6 +44,7 @@ const Share = (props) => {
 
   return (
     <div className="ShareFiles">
+      <Sidebar/>
       <h1>Files to be Shared</h1>
       <div className="searchBar-Profiles">
         <input
